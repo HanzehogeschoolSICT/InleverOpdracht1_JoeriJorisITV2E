@@ -1,7 +1,6 @@
 package view;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class StartGui extends Application{
@@ -10,8 +9,7 @@ public class StartGui extends Application{
         primaryStage.setTitle("Sorteerdingen met stapsgewijs");
         System.out.println("test");
 
-        Scene scene = new Scene(new GuiSettings().gridPane,550,300);
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new GuiSettings().scene);
         primaryStage.show();
     }
 
