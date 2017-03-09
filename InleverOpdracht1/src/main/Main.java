@@ -14,4 +14,8 @@ public class Main extends Application{
         primaryStage.setTitle("Sorteerdingen met stapsgewijs");
         System.out.println("test");
     }
+
+    ArrayCreation arrayCreation = new ArrayCreation();
+    int[] array = arrayCreation.createArray(30);
+    System.out.println(array);
 }
