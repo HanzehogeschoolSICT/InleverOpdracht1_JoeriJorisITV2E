@@ -1,0 +1,17 @@
+https://nl.wikipedia.org/wiki/Model-view-controller-model
+
+---Model---
+Definieert de representatie van de informatie waarmee de applicatie werkt.
+Aan ruwe gegevens wordt betekenis gegeven door relaties tussen data en logica toe te voegen.
+De daadwerkelijke opslag van data wordt gedaan met behulp van een persistent opslagmedium, zoals een database.
+De applicatie zal gegevens die gebruikt worden in het model, ophalen en
+wegschrijven van en naar de dataopslag via een datalaag.
+De datalaag is niet per se een onderdeel van het MVC-patroon.
+
+---View---
+Informatie wordt weergegeven via de View.
+Userinterface-elementen zullen gedefinieerd zijn in dit onderdeel.
+De view doet geen verwerking (zoals berekeningen, controles,...) van de gegevens die getoond worden.
+
+---Controller---
+De controller verwerkt en reageert op events, die meestal het gevolg zijn van handelingen van de gebruiker.
