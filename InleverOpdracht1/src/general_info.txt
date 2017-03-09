@@ -15,3 +15,8 @@ De view doet geen verwerking (zoals berekeningen, controles,...) van de gegevens
 
 ---Controller---
 De controller verwerkt en reageert op events, die meestal het gevolg zijn van handelingen van de gebruiker.
+
+
+
+---Onze Datastructuur---
+Gebruik maken van een Array; wordt gevuld op het moment dat hij gemaakt wordt. Er worden geen nieuwe waardes toegevoegd zodra de array aangemaakt is.
