@@ -8,10 +8,6 @@ public class Main extends Application{
     public static void main(String[] args){
         ArrayCreation arrayCreation = new ArrayCreation();
         int[] array = arrayCreation.createArray(30);
-        for (int item:array){
-            System.out.println(item);
-        }
-        System.out.println(array);
 
         launch(args);
     }

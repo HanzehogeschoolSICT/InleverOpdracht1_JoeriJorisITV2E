@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Arrays;
+import java.util.Random;
 
 public class ArrayCreation {
 
@@ -10,13 +10,18 @@ public class ArrayCreation {
             array[i] = i;
         }
 
-//        for (int i = 0; i < array.length; i++) {
-//            int random = (int) (Math.random() * array.length);
-//            int tmp = Arrays.asList(array).indexOf(random);
-//            array[random] = Arrays.asList(array).indexOf(i);
-//            array[i] = tmp;
-//        }
+        //Inspiratie: http://www.programcreek.com/2012/02/java-method-to-shuffle-an-int-array-with-random-order/
+        Random rgen = new Random();
+        for (int i=0; i<array.length; i++) {
+            int randomPosition = rgen.nextInt(array.length);
+            int temp = array[i];
+            array[i] = array[randomPosition];
+            array[randomPosition] = temp;
+        }
 
+        for (int item:array){
+            System.out.println(item);
+        }
         return array;
     }
 }
