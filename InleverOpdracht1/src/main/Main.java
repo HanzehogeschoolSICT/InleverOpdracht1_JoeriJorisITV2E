@@ -6,6 +6,13 @@ import model.ArrayCreation;
 
 public class Main extends Application{
     public static void main(String[] args){
+        ArrayCreation arrayCreation = new ArrayCreation();
+        int[] array = arrayCreation.createArray(30);
+        for (int item:array){
+            System.out.println(item);
+        }
+        System.out.println(array);
+
         launch(args);
     }
 
@@ -14,8 +21,4 @@ public class Main extends Application{
         primaryStage.setTitle("Sorteerdingen met stapsgewijs");
         System.out.println("test");
     }
-
-    ArrayCreation arrayCreation = new ArrayCreation();
-    int[] array = arrayCreation.createArray(30);
-    System.out.println(array);
 }
