@@ -3,7 +3,9 @@ package view;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class GuiSettings {
@@ -18,47 +20,57 @@ public class GuiSettings {
         }
     }
 
-    private GridPane makeRootGridPane() throws Exception{
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setPadding(new Insets(25,25,25,25));
+    private BorderPane makeRootVBox() throws Exception{
+        BorderPane vBox = new BorderPane();
+//        vBox.setAlignment(Pos.CENTER);
+//        vBox.setPadding(new Insets(25,25,25,25));
 
-        gridPane.setGridLinesVisible(true);
+        vBox.visibleProperty();
 
-        VBox vBox = makeVBox();
-        GridPane bottomPane = makeBottomGridpane();
+        HBox hBox = makeHBox();
+        HBox bottomPane = makeBottomGridpane();
 
-        bottomPane.setGridLinesVisible(true);
+//        bottomPane.setGridLinesVisible(true);
 
         GuiAttributes guiAttributes = new GuiAttributes();
 
-//        gridPane.getChildren().addAll(vBox,bottomPane);
-        bottomPane.getChildren().addAll(guiAttributes.radioButton,guiAttributes.resetButton);
-        gridPane.add(bottomPane,1,1);
-
-        return gridPane;
-    }
-
-    private VBox makeVBox() throws Exception{
-        VBox vBox = new VBox();
-        vBox.setPadding(new Insets(25,25,25,25));
-        vBox.isVisible();
+        hBox.getChildren().add(guiAttributes.textArea);
+        bottomPane.getChildren().add(guiAttributes.radioBubble);
+        bottomPane.getChildren().add(guiAttributes.radioInsertion);
+        bottomPane.getChildren().add(guiAttributes.radioQuick);
+        bottomPane.getChildren().add(guiAttributes.resetButton);
+        vBox.setCenter(hBox);
+        vBox.setBottom(bottomPane);
+//        bottomPane.add(guiAttributes.radioButton,0,0,2,1);
+//        bottomPane.add(guiAttributes.resetButton,5,0,2,1);
+//        bottomPane.setSpacing(2);
+//        vBox.getChildren().add(hBox);
+//        vBox.getChildren().add(bottomPane);
+//        vBox.add(hBox,1,0);
+//        vBox.add(bottomPane,1,1);
 
         return vBox;
     }
 
-    private GridPane makeBottomGridpane() throws Exception{
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
+    private HBox makeHBox() throws Exception{
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.TOP_CENTER);
+        hBox.setPadding(new Insets(25,25,25,25));
+        hBox.isVisible();
+
+        return hBox;
+    }
+
+    private HBox makeBottomGridpane() throws Exception{
+        HBox gridPane = new HBox();
+        gridPane.setAlignment(Pos.BOTTOM_CENTER);
         gridPane.setPadding(new Insets(25,25,25,25));
 
         return gridPane;
     }
 
     private Scene makeScene() throws Exception{
-        GridPane rootPane = makeRootGridPane();
+        BorderPane rootPane = makeRootVBox();
         Scene scene = new Scene(rootPane,650,400);
         return scene;
     }
