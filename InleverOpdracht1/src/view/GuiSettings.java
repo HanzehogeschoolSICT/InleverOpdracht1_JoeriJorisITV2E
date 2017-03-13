@@ -30,7 +30,11 @@ public class GuiSettings {
 
         bottomPane.setGridLinesVisible(true);
 
-        gridPane.getChildren().addAll(vBox,bottomPane);
+        GuiAttributes guiAttributes = new GuiAttributes();
+
+//        gridPane.getChildren().addAll(vBox,bottomPane);
+        bottomPane.getChildren().addAll(guiAttributes.radioButton,guiAttributes.resetButton);
+        gridPane.add(bottomPane,1,1);
 
         return gridPane;
     }
@@ -58,4 +62,5 @@ public class GuiSettings {
         Scene scene = new Scene(rootPane,650,400);
         return scene;
     }
+
 }
