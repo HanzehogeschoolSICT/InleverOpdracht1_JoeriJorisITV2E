@@ -18,10 +18,6 @@ public class ArrayCreation {
             array[i] = array[randomPosition];
             array[randomPosition] = temp;
         }
-
-        for (int item:array){
-            System.out.println(item);
-        }
         return array;
     }
 }

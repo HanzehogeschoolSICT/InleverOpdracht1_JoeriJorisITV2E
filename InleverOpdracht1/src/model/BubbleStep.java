@@ -1,7 +1,21 @@
 package model;
 
-/**
- * Created by Joris on 13-3-2017.
- */
 public class BubbleStep {
+
+    public static int[] bubbleStep(int[] list){
+        Boolean sorted = true;
+        while (sorted){
+            sorted = false;
+            for (int i = 0; i < list.length - 1; i++){
+                if (list[i] > list[i + 1]){
+                    Integer temporaryI = list[i];
+                    list[i] = list[i+1];
+                    list[i+1] = temporaryI;
+//                    return list;
+                    sorted = true;
+                }
+            }
+        }
+        return list;
+    }
 }
