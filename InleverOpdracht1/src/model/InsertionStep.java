@@ -1,5 +1,7 @@
 package model;
 
+import view.GuiAttributes;
+
 public class InsertionStep {
     public static int[] insertionStep(int[] list) {
     //inspiratie: http://www.java2novice.com/java-sorting-algorithms/insertion-sort/
