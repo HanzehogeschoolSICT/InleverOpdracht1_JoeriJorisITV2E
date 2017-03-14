@@ -16,6 +16,7 @@ public class GuiAttributes {
     RadioButton radioQuick;
     TextArea textArea;
 
+
     final ToggleGroup toggleGroup = new ToggleGroup();
 
     public GuiAttributes(){
@@ -31,10 +32,18 @@ public class GuiAttributes {
             e.printStackTrace();
         }
     }
+
     private Button makeResetButton() throws Exception{
         Button button = new Button("Reset");
         button.setMaxWidth(Double.MAX_VALUE);
+        button.setOnAction(e -> doReset());
+
         return button;
+    }
+
+    private void doReset(){
+        System.out.println("Nu moet de array opnieuw gevuld worden.");
+        System.out.println("Toggled: " + toggleGroup.getSelectedToggle());
     }
 
     private RadioButton makeRadioBubble() throws Exception{
