@@ -22,32 +22,20 @@ public class GuiSettings {
 
     private BorderPane makeRootVBox() throws Exception{
         BorderPane vBox = new BorderPane();
-//        vBox.setAlignment(Pos.CENTER);
-//        vBox.setPadding(new Insets(25,25,25,25));
 
         vBox.visibleProperty();
 
         HBox hBox = makeHBox();
         HBox bottomPane = makeBottomGridpane();
 
-//        bottomPane.setGridLinesVisible(true);
+        vBox.borderProperty();
 
         GuiAttributes guiAttributes = new GuiAttributes();
 
         hBox.getChildren().add(guiAttributes.textArea);
-        bottomPane.getChildren().add(guiAttributes.radioBubble);
-        bottomPane.getChildren().add(guiAttributes.radioInsertion);
-        bottomPane.getChildren().add(guiAttributes.radioQuick);
-        bottomPane.getChildren().add(guiAttributes.resetButton);
+        bottomPane.getChildren().addAll(guiAttributes.radioBubble,guiAttributes.radioInsertion,guiAttributes.radioQuick,guiAttributes.stepButton,guiAttributes.resetButton);
         vBox.setCenter(hBox);
         vBox.setBottom(bottomPane);
-//        bottomPane.add(guiAttributes.radioButton,0,0,2,1);
-//        bottomPane.add(guiAttributes.resetButton,5,0,2,1);
-//        bottomPane.setSpacing(2);
-//        vBox.getChildren().add(hBox);
-//        vBox.getChildren().add(bottomPane);
-//        vBox.add(hBox,1,0);
-//        vBox.add(bottomPane,1,1);
 
         return vBox;
     }

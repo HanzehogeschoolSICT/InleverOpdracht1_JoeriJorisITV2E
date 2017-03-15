@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 public class GuiAttributes {
     Button resetButton;
+    Button stepButton;
     RadioButton radioBubble;
     RadioButton radioInsertion;
     RadioButton radioQuick;
@@ -19,11 +20,14 @@ public class GuiAttributes {
 
     final ToggleGroup toggleGroup = new ToggleGroup();
 
+    public final GuiEventHandler guiEventHandler = new GuiEventHandler();
+
     public GuiAttributes(){
         try {
             ArrayCreation arrayCreation = new ArrayCreation();
             int[] array = arrayCreation.createArray(30);
             this.resetButton = makeResetButton();
+            this.stepButton = makeStepButton();
             this.radioBubble = makeRadioBubble();
             this.radioInsertion = makeRadioInsertion();
             this.radioQuick = makeRadioQuick();
@@ -36,14 +40,17 @@ public class GuiAttributes {
     private Button makeResetButton() throws Exception{
         Button button = new Button("Reset");
         button.setMaxWidth(Double.MAX_VALUE);
-        button.setOnAction(e -> doReset());
+        button.setOnAction(guiEventHandler::doReset);
 
         return button;
     }
 
-    private void doReset(){
-        System.out.println("Nu moet de array opnieuw gevuld worden.");
-        System.out.println("Toggled: " + toggleGroup.getSelectedToggle());
+    private Button makeStepButton() throws Exception{
+        Button button = new Button("Step");
+        button.setMaxWidth(Double.MAX_VALUE);
+//        button.setOnAction(guiEventHandler::doReset);
+
+        return button;
     }
 
     private RadioButton makeRadioBubble() throws Exception{
