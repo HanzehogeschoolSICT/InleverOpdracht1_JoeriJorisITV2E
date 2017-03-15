@@ -1,5 +1,6 @@
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -20,8 +21,6 @@ public class GuiAttributes {
 
     final ToggleGroup toggleGroup = new ToggleGroup();
 
-    public final GuiEventHandler guiEventHandler = new GuiEventHandler();
-
     public GuiAttributes(){
         try {
             ArrayCreation arrayCreation = new ArrayCreation();
@@ -40,7 +39,7 @@ public class GuiAttributes {
     private Button makeResetButton() throws Exception{
         Button button = new Button("Reset");
         button.setMaxWidth(Double.MAX_VALUE);
-        button.setOnAction(guiEventHandler::doReset);
+        button.setOnAction(e -> doReset());
 
         return button;
     }
@@ -48,7 +47,7 @@ public class GuiAttributes {
     private Button makeStepButton() throws Exception{
         Button button = new Button("Step");
         button.setMaxWidth(Double.MAX_VALUE);
-//        button.setOnAction(guiEventHandler::doReset);
+//        button.setOnAction(e -> doReset()); MOET NOG FUNCTION VOOR WORDEN GEMAAKT
 
         return button;
     }
@@ -89,4 +88,12 @@ public class GuiAttributes {
 
         return textArea;
     }
+
+    //---Event Handlers---
+    private void doReset(){
+        System.out.println("Nu moet de array opnieuw gevuld worden.");
+        System.out.println("Toggled: " + toggleGroup.getSelectedToggle());
+    }
+
 }
+
