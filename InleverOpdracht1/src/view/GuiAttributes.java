@@ -17,20 +17,20 @@ public class GuiAttributes {
     RadioButton radioInsertion;
     RadioButton radioQuick;
     TextArea textArea;
+    ArrayCreation arrayCreation = new ArrayCreation();
 
 
     final ToggleGroup toggleGroup = new ToggleGroup();
 
     public GuiAttributes(){
         try {
-            ArrayCreation arrayCreation = new ArrayCreation();
             int[] array = arrayCreation.createArray(30);
             this.resetButton = makeResetButton();
             this.stepButton = makeStepButton();
             this.radioBubble = makeRadioBubble();
             this.radioInsertion = makeRadioInsertion();
             this.radioQuick = makeRadioQuick();
-            this.textArea = testTextArea(Arrays.toString(array));
+            this.textArea = testTextArea(Arrays.toString(arrayCreation.);
         } catch (Exception e){
             e.printStackTrace();
         }
