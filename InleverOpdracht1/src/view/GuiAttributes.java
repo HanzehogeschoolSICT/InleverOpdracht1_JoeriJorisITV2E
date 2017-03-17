@@ -17,6 +17,7 @@ public class GuiAttributes {
     RadioButton radioInsertion;
     RadioButton radioQuick;
     TextArea textArea;
+    String textAreaString;
     ArrayCreation arrayCreation = new ArrayCreation();
 
 
@@ -24,13 +25,14 @@ public class GuiAttributes {
 
     public GuiAttributes(){
         try {
-            int[] array = arrayCreation.createArray(30);
+//            int[] array = arrayCreation.createArray(30);
             this.resetButton = makeResetButton();
             this.stepButton = makeStepButton();
             this.radioBubble = makeRadioBubble();
             this.radioInsertion = makeRadioInsertion();
             this.radioQuick = makeRadioQuick();
-            this.textArea = testTextArea(Arrays.toString(arrayCreation.);
+            this.textAreaString = fillTextArea();
+            this.textArea = testTextArea(fillTextArea());
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -89,10 +91,17 @@ public class GuiAttributes {
         return textArea;
     }
 
-    //---Event Handlers---
+    //-----------Event Handlers-----------
     private void doReset(){
         System.out.println("Nu moet de array opnieuw gevuld worden.");
         System.out.println("Toggled: " + toggleGroup.getSelectedToggle());
+        textAreaString = fillTextArea();
+        System.out.println(textAreaString);
+    }
+
+    private String fillTextArea(){
+        textAreaString = Arrays.toString(arrayCreation.createArray(30));
+        return textAreaString;
     }
 
 }

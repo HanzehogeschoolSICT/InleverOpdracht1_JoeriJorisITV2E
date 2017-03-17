@@ -3,17 +3,18 @@ package model;
 import java.util.Random;
 
 public class ArrayCreation {
-    int[] array;
+//    public int[] array;
 
-    public ArrayCreation(){
-        try{
-            this.array = createArray(30);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public ArrayCreation(){
+//        try{
+//            this.array = createArray(30);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        this.array = createArray(30);
+//    }
 
-    private int[] createArray(int length) {
+    public int[] createArray(int length) {
         int[] array = new int[length];
         for (int i = 0;i < length; i++){
             array[i] = i;
