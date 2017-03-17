@@ -2,6 +2,10 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -18,6 +22,7 @@ public class GuiAttributes {
     RadioButton radioQuick;
     TextArea textArea;
     String textAreaString;
+    BarChart barChart;
     ArrayCreation arrayCreation = new ArrayCreation();
 
 
@@ -33,6 +38,8 @@ public class GuiAttributes {
             this.radioQuick = makeRadioQuick();
             this.textAreaString = fillTextArea();
             this.textArea = testTextArea(fillTextArea());
+//            this.textArea = testTextArea(Arrays.toString(arrayCreation.array));
+            this.barChart = makeBarchart();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -82,6 +89,18 @@ public class GuiAttributes {
         radioQuick.setText("Quick sort");
 
         return radioQuick;
+    }
+
+    private BarChart makeBarchart() {
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        BarChart<String, Number> bc =
+                new BarChart<>(xAxis, yAxis);
+//        XYChart.Series series = new XYChart.Series();
+//        series.getData().add(5, 6);
+        bc.setTitle("Sorting algorithm step-by-step");
+
+        return bc;
     }
 
     private TextArea testTextArea(String list) throws Exception{
