@@ -1,6 +1,7 @@
 package view;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
@@ -42,8 +43,8 @@ public class GuiAttributes {
             this.radioQuick = makeRadioQuick();
             this.listForObservable = new ArrayList<>(30);
             this.observableList = FXCollections.observableList(listForObservable);
-            this.barChart = makeBarchart(observableList);
             fillObservableList();
+            this.barChart = makeBarchart(observableList);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -99,19 +100,19 @@ public class GuiAttributes {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
 
-//        observableList.addListener(new ListChangeListener<Integer>() {
-//            @Override
-//            public void onChanged(Change<? extends Integer> c) {
-//                System.out.println("Detected change");
-//            }
-//        });
+        observable.addListener(new ListChangeListener<Integer>() {
+            @Override
+            public void onChanged(Change<? extends Integer> change) {
+                System.out.println("Detected change" + change);
+            }
+        });
 
         BarChart<String, Number> barChart =
                 new BarChart<>(xAxis, yAxis);
         barChart.setTitle("Sorting algorithm step-by-step");
         XYChart.Series series = new XYChart.Series();
-
-        for (int item:observableList){
+        System.out.println("observable in makebarchart: "+observable);
+        for (int item:observable){
             series.getData().add(new XYChart.Data(Integer.toString(item), item));
         }
         barChart.getData().addAll(series);
@@ -130,10 +131,12 @@ public class GuiAttributes {
 
     private void fillObservableList(){
         int[] array = arrayCreation.createArray(30);
+        System.out.println("Array: "+Arrays.toString(array));
         observableList.clear();
         for (int item: array){
             observableList.add(item);
         }
+        System.out.println("Observable list: "+observableList);
     }
 
 }
