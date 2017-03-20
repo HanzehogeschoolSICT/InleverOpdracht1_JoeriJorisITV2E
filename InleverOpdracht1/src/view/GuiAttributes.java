@@ -13,7 +13,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import model.ArrayCreation;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GuiAttributes {
@@ -41,7 +43,7 @@ public class GuiAttributes {
             this.listForObservable = new ArrayList<>(30);
             this.observableList = FXCollections.observableList(listForObservable);
             this.barChart = makeBarchart(observableList);
-
+            fillObservableList();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -109,7 +111,7 @@ public class GuiAttributes {
         barChart.setTitle("Sorting algorithm step-by-step");
         XYChart.Series series = new XYChart.Series();
 
-        for (int item:observable){
+        for (int item:observableList){
             series.getData().add(new XYChart.Data(Integer.toString(item), item));
         }
         barChart.getData().addAll(series);
@@ -119,23 +121,16 @@ public class GuiAttributes {
         return barChart;
     }
 
-    private TextArea testTextArea(String list) throws Exception{
-        TextArea textArea = new TextArea();
-        textArea.setText(list);
-
-        return textArea;
-    }
-
     //-----------Event Handlers-----------
     private void doReset(){
         fillObservableList();
         //Maak de bar chart hier met de nieuwe class variable observable list!
         System.out.println("Toggled: " + toggleGroup.getSelectedToggle());
-
     }
 
     private void fillObservableList(){
         int[] array = arrayCreation.createArray(30);
+        observableList.clear();
         for (int item: array){
             observableList.add(item);
         }
