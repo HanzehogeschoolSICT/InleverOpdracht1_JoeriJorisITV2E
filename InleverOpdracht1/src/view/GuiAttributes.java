@@ -1,9 +1,7 @@
 package view;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -16,10 +14,7 @@ import javafx.scene.control.ToggleGroup;
 import model.ArrayCreation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static javafx.scene.input.KeyCode.X;
 
 public class GuiAttributes {
     Button resetButton;
@@ -27,13 +22,10 @@ public class GuiAttributes {
     RadioButton radioBubble;
     RadioButton radioInsertion;
     RadioButton radioQuick;
-    TextArea textArea;
-    String textAreaString;
     BarChart barChart;
     ArrayCreation arrayCreation = new ArrayCreation();
-    int[] list;
 
-    List<Integer> lijst;
+    List<Integer> listForObservable;
     ObservableList<Integer> observableList;
 
 
@@ -46,10 +38,8 @@ public class GuiAttributes {
             this.radioBubble = makeRadioBubble();
             this.radioInsertion = makeRadioInsertion();
             this.radioQuick = makeRadioQuick();
-            this.textAreaString = fillTextArea();
-            this.textArea = testTextArea(textAreaString);
-            this.lijst = new ArrayList<>(30);
-            this.observableList = FXCollections.observableList(lijst);
+            this.listForObservable = new ArrayList<>(30);
+            this.observableList = FXCollections.observableList(listForObservable);
             this.barChart = makeBarchart(observableList);
 
         } catch (Exception e){
@@ -138,20 +128,17 @@ public class GuiAttributes {
 
     //-----------Event Handlers-----------
     private void doReset(){
-        String array = fillTextArea();
-        textArea.setText(array);
-        //Maak de bar chart hier!
-        System.out.println(textAreaString);
+        fillObservableList();
+        //Maak de bar chart hier met de nieuwe class variable observable list!
         System.out.println("Toggled: " + toggleGroup.getSelectedToggle());
 
     }
 
-    private String fillTextArea(){
+    private void fillObservableList(){
         int[] array = arrayCreation.createArray(30);
-        textAreaString = Arrays.toString(array);
-        list = array;
-//        makeBarchart(array);
-        return textAreaString;
+        for (int item: array){
+            observableList.add(item);
+        }
     }
 
 }
