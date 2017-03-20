@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 public class StartGui extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("Sorteerdingen met stapsgewijs");
+        primaryStage.setTitle("Sorteeralgoritmen per stap");
 
         primaryStage.setScene(new GuiSettings().scene);
         primaryStage.show();

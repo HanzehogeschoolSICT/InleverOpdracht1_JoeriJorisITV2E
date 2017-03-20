@@ -3,16 +3,6 @@ package model;
 import java.util.Random;
 
 public class ArrayCreation {
-//    public int[] array;
-
-//    public ArrayCreation(){
-//        try{
-//            this.array = createArray(30);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        this.array = createArray(30);
-//    }
 
     public int[] createArray(int length) {
         int[] array = new int[length];

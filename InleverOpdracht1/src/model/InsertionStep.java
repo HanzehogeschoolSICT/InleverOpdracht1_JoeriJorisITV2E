@@ -2,6 +2,7 @@ package model;
 
 import view.GuiAttributes;
 
+
 public class InsertionStep {
     public static int[] insertionStep(int[] list) {
     //inspiratie: http://www.java2novice.com/java-sorting-algorithms/insertion-sort/
@@ -12,6 +13,7 @@ public class InsertionStep {
                     temporary = list[j];
                     list[j] = list[j - 1];
                     list[j - 1] = temporary;
+                    break;
                 }
             }
         }

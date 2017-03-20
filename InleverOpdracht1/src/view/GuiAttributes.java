@@ -1,6 +1,5 @@
 package view;
 
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -24,13 +23,13 @@ public class GuiAttributes {
     String textAreaString;
     BarChart barChart;
     ArrayCreation arrayCreation = new ArrayCreation();
+    int[] list;
 
 
     final ToggleGroup toggleGroup = new ToggleGroup();
 
     public GuiAttributes(){
         try {
-//            int[] array = arrayCreation.createArray(30);
             this.resetButton = makeResetButton();
             this.stepButton = makeStepButton();
             this.radioBubble = makeRadioBubble();
@@ -38,8 +37,7 @@ public class GuiAttributes {
             this.radioQuick = makeRadioQuick();
             this.textAreaString = fillTextArea();
             this.textArea = testTextArea(fillTextArea());
-//            this.textArea = testTextArea(Arrays.toString(arrayCreation.array));
-            this.barChart = makeBarchart();
+            makeBarchart(this.list);
             this.textArea = testTextArea(textAreaString);
         } catch (Exception e){
             e.printStackTrace();
@@ -92,16 +90,25 @@ public class GuiAttributes {
         return radioQuick;
     }
 
-    private BarChart makeBarchart() {
+    private void makeBarchart(int[] list) {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-        BarChart<String, Number> bc =
+        BarChart<String, Number> barChart =
                 new BarChart<>(xAxis, yAxis);
-//        XYChart.Series series = new XYChart.Series();
-//        series.getData().add(5, 6);
-        bc.setTitle("Sorting algorithm step-by-step");
+        barChart.setTitle("Sorting algorithm step-by-step");
 
-        return bc;
+        XYChart.Series series1 = new XYChart.Series();
+
+        for (int item:list){
+            series1.getData().add(new XYChart.Data(Integer.toString(item), item));
+        }
+        barChart.getData().addAll(series1);
+        barChart.setBarGap(1);
+        barChart.setCategoryGap(0);
+
+        this.barChart = barChart;
+
+        //Misschien ipv returnen daadwerkelijk maken.
     }
 
     private TextArea testTextArea(String list) throws Exception{
@@ -113,14 +120,19 @@ public class GuiAttributes {
 
     //-----------Event Handlers-----------
     private void doReset(){
-        textArea.setText(fillTextArea());
+        String array = fillTextArea();
+        textArea.setText(array);
+        //Maak de bar chart hier!
         System.out.println(textAreaString);
         System.out.println("Toggled: " + toggleGroup.getSelectedToggle());
 
     }
 
     private String fillTextArea(){
-        textAreaString = Arrays.toString(arrayCreation.createArray(30));
+        int[] array = arrayCreation.createArray(30);
+        textAreaString = Arrays.toString(array);
+        list = array;
+        makeBarchart(array);
         return textAreaString;
     }
 
