@@ -33,8 +33,8 @@ public class GuiAttributes {
     ArrayCreation arrayCreation = new ArrayCreation();
     int[] list;
 
-    List<Integer> lijst = new ArrayList<>(30);
-    ObservableList<Integer> observableList = FXCollections.observableList(lijst);
+    List<Integer> lijst;
+    ObservableList<Integer> observableList;
 
 
     final ToggleGroup toggleGroup = new ToggleGroup();
@@ -48,6 +48,9 @@ public class GuiAttributes {
             this.radioQuick = makeRadioQuick();
             this.textAreaString = fillTextArea();
             this.textArea = testTextArea(textAreaString);
+            this.lijst = new ArrayList<>(30);
+            this.observableList = FXCollections.observableList(lijst);
+            this.barChart = makeBarchart(observableList);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -100,7 +103,7 @@ public class GuiAttributes {
         return radioQuick;
     }
 
-    private void makeBarchart(ObservableList<Integer> observable) {
+    private BarChart makeBarchart(ObservableList<Integer> observable) {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
 
@@ -123,7 +126,7 @@ public class GuiAttributes {
         barChart.setBarGap(1);
         barChart.setCategoryGap(0);
 
-        this.barChart = barChart;
+        return barChart;
     }
 
     private TextArea testTextArea(String list) throws Exception{
