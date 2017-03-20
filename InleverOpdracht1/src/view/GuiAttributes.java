@@ -33,6 +33,9 @@ public class GuiAttributes {
     ArrayCreation arrayCreation = new ArrayCreation();
     int[] list;
 
+    List<Integer> lijst = new ArrayList<>(30);
+    ObservableList<Integer> observableList = FXCollections.observableList(lijst);
+
 
     final ToggleGroup toggleGroup = new ToggleGroup();
 
@@ -44,9 +47,8 @@ public class GuiAttributes {
             this.radioInsertion = makeRadioInsertion();
             this.radioQuick = makeRadioQuick();
             this.textAreaString = fillTextArea();
-            this.textArea = testTextArea(fillTextArea());
-            makeBarchart(this.list);
             this.textArea = testTextArea(textAreaString);
+
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -98,58 +100,30 @@ public class GuiAttributes {
         return radioQuick;
     }
 
-    private void makeBarchart(int[] list) {
+    private void makeBarchart(ObservableList<Integer> observable) {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
 
-        List<Integer> lijst = new ArrayList<>(30);
-//        lijst.add(2);
-//        lijst.add(3);
-//        lijst.add(4);
-//        lijst.add(5);
+//        observableList.addListener(new ListChangeListener<Integer>() {
+//            @Override
+//            public void onChanged(Change<? extends Integer> c) {
+//                System.out.println("Detected change");
+//            }
+//        });
 
-        ObservableList<Integer> observableList = FXCollections.observableList(lijst);
-        observableList.addListener(new ListChangeListener<Integer>() {
-            @Override
-            public void onChanged(Change<? extends Integer> c) {
-                System.out.println("Detected change");
-            }
-        });
-
-        observableList.add(2);
-        observableList.add(3);
-        observableList.add(4);
-        observableList.add(5);
-        observableList.add(6);
-        observableList.add(7);
-
-        String a = "A";
-        String b = "B";
-
-        BarChart<String, Number> bc =
         BarChart<String, Number> barChart =
                 new BarChart<>(xAxis, yAxis);
         barChart.setTitle("Sorting algorithm step-by-step");
         XYChart.Series series = new XYChart.Series();
-//        series.getData(XYChart.Series(observableList<XYChart.Data<X,Y>> observableList));
-//        series.getData().add(0, 6);
-        series.getData().add(0, 1);
-        series.getData().add(1,2);
 
-        bc.setTitle("Sorting algorithm step-by-step");
-
-        XYChart.Series series1 = new XYChart.Series();
-
-        for (int item:list){
-            series1.getData().add(new XYChart.Data(Integer.toString(item), item));
+        for (int item:observable){
+            series.getData().add(new XYChart.Data(Integer.toString(item), item));
         }
-        barChart.getData().addAll(series1);
+        barChart.getData().addAll(series);
         barChart.setBarGap(1);
         barChart.setCategoryGap(0);
 
         this.barChart = barChart;
-
-        //Misschien ipv returnen daadwerkelijk maken.
     }
 
     private TextArea testTextArea(String list) throws Exception{
@@ -173,7 +147,7 @@ public class GuiAttributes {
         int[] array = arrayCreation.createArray(30);
         textAreaString = Arrays.toString(array);
         list = array;
-        makeBarchart(array);
+//        makeBarchart(array);
         return textAreaString;
     }
 
