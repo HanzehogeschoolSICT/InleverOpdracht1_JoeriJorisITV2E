@@ -20,10 +20,6 @@ public class GuiSettings {
         }
     }
 
-    public void redrawPane(){
-
-    }
-
     private BorderPane makeRootVBox() throws Exception{
         BorderPane vBox = new BorderPane();
 

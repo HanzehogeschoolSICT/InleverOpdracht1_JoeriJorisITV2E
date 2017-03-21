@@ -8,6 +8,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import model.ArrayCreation;
 import model.BubbleStep;
+import model.InsertionStep;
+import model.QuickStep;
 
 import java.util.Arrays;
 
@@ -104,7 +106,19 @@ public class GuiAttributes {
     }
 
     private void doStep(){
-        textArea.setText(Arrays.toString(BubbleStep.bubbleStep(currentArray)));
+        if (toggleGroup.getSelectedToggle().toString().contains("Bubble")) {
+            textArea.setText(Arrays.toString(BubbleStep.bubbleStep(currentArray)));
+        }
+        else if(toggleGroup.getSelectedToggle().toString().contains("Insertion")){
+            textArea.setText(Arrays.toString(InsertionStep.insertionStep(currentArray)));
+        }
+        else if(toggleGroup.getSelectedToggle().toString().contains("Quick")){
+//            textArea.setText(Arrays.toString(QuickStep.quickStep(currentArray)));
+            System.out.println("quick algorithm");
+        }
+        else {
+            System.out.println("Er is geen sorterings algoritme geselecteerd");
+        }
     }
 
     private String fillTextArea(){
