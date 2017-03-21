@@ -1,6 +1,5 @@
 package view;
 
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -9,13 +8,18 @@ import javafx.scene.control.ToggleGroup;
 import model.ArrayCreation;
 import model.BubbleStep;
 import model.InsertionStep;
-import model.QuickStep;
 
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static java.lang.Thread.sleep;
 
 public class GuiAttributes {
     Button resetButton;
     Button stepButton;
+    Button runButton;
+    Boolean autoBoolean = false;
     RadioButton radioBubble;
     RadioButton radioInsertion;
     RadioButton radioQuick;
@@ -23,6 +27,7 @@ public class GuiAttributes {
     String textAreaString;
     ArrayCreation arrayCreation = new ArrayCreation();
     int[] currentArray;
+    int currentAutoRun = 0;
 
 
     final ToggleGroup toggleGroup = new ToggleGroup();
@@ -31,6 +36,7 @@ public class GuiAttributes {
         try {
             this.resetButton = makeResetButton();
             this.stepButton = makeStepButton();
+            this.runButton = makeRunButton();
             this.radioBubble = makeRadioBubble();
             this.radioInsertion = makeRadioInsertion();
             this.radioQuick = makeRadioQuick();
@@ -56,6 +62,39 @@ public class GuiAttributes {
         button.setOnAction(e -> doStep());
 
         return button;
+    }
+
+    private Button makeRunButton(){
+        Button button = new Button("Auto Run");
+        button.setMaxWidth(Double.MAX_VALUE);
+        button.setOnAction(e -> {
+            try {
+                autoRun();
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+        });
+
+        return button;
+    }
+
+    private void autoRun() throws InterruptedException {
+        autoBoolean ^= true;
+
+        Timer timer = new Timer( );
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                //gaat ineens sneller lopen als pauze
+                if (autoBoolean){
+                    stepButton.setDisable(true);
+                    doStep();
+                    System.out.println("Test"+ currentAutoRun);
+                    currentAutoRun +=1;
+                }
+                stepButton.setDisable(false);
+            }
+        }, 1000, 1000);
     }
 
     private RadioButton makeRadioBubble() throws Exception{

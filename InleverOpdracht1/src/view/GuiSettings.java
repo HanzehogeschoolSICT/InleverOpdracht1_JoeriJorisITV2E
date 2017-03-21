@@ -32,8 +32,15 @@ public class GuiSettings {
 
         GuiAttributes guiAttributes = new GuiAttributes();
 
-        hBox.getChildren().add(guiAttributes.textArea);
-        bottomPane.getChildren().addAll(guiAttributes.radioBubble,guiAttributes.radioInsertion,guiAttributes.radioQuick,guiAttributes.stepButton,guiAttributes.resetButton);
+        hBox.getChildren().add(
+                guiAttributes.textArea);
+        bottomPane.getChildren().addAll(
+                guiAttributes.radioBubble,
+                guiAttributes.radioInsertion,
+                guiAttributes.radioQuick,
+                guiAttributes.runButton,
+                guiAttributes.stepButton,
+                guiAttributes.resetButton);
         vBox.setCenter(hBox);
         vBox.setBottom(bottomPane);
 
