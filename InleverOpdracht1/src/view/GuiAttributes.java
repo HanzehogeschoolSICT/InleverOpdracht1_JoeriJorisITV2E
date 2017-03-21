@@ -1,23 +1,14 @@
 package view;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import model.ArrayCreation;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class GuiAttributes {
     Button resetButton;
@@ -25,26 +16,23 @@ public class GuiAttributes {
     RadioButton radioBubble;
     RadioButton radioInsertion;
     RadioButton radioQuick;
-    BarChart barChart;
+    TextArea textArea;
+    String textAreaString;
     ArrayCreation arrayCreation = new ArrayCreation();
-
-    List<Integer> listForObservable;
-    ObservableList<Integer> observableList;
 
 
     final ToggleGroup toggleGroup = new ToggleGroup();
 
     public GuiAttributes(){
         try {
+//            int[] array = arrayCreation.createArray(30);
             this.resetButton = makeResetButton();
             this.stepButton = makeStepButton();
             this.radioBubble = makeRadioBubble();
             this.radioInsertion = makeRadioInsertion();
             this.radioQuick = makeRadioQuick();
-            this.listForObservable = new ArrayList<>(30);
-            this.observableList = FXCollections.observableList(listForObservable);
-            fillObservableList();
-            this.barChart = makeBarchart(observableList);
+            this.textAreaString = fillTextArea();
+            this.textArea = testTextArea(textAreaString);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -96,47 +84,24 @@ public class GuiAttributes {
         return radioQuick;
     }
 
-    private BarChart makeBarchart(ObservableList<Integer> observable) {
-        final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();
+    private TextArea testTextArea(String list) throws Exception{
+        TextArea textArea = new TextArea();
+        textArea.setText(list);
 
-        observable.addListener(new ListChangeListener<Integer>() {
-            @Override
-            public void onChanged(Change<? extends Integer> change) {
-                System.out.println("Detected change" + change);
-            }
-        });
-
-        BarChart<String, Number> barChart =
-                new BarChart<>(xAxis, yAxis);
-        barChart.setTitle("Sorting algorithm step-by-step");
-        XYChart.Series series = new XYChart.Series();
-        System.out.println("observable in makebarchart: "+observable);
-        for (int item:observable){
-            series.getData().add(new XYChart.Data(Integer.toString(item), item));
-        }
-        barChart.getData().addAll(series);
-        barChart.setBarGap(1);
-        barChart.setCategoryGap(0);
-
-        return barChart;
+        return textArea;
     }
 
     //-----------Event Handlers-----------
     private void doReset(){
-        fillObservableList();
-        //Maak de bar chart hier met de nieuwe class variable observable list!
+        textArea.setText(fillTextArea());
+        System.out.println(textAreaString);
         System.out.println("Toggled: " + toggleGroup.getSelectedToggle());
+
     }
 
-    private void fillObservableList(){
-        int[] array = arrayCreation.createArray(30);
-        System.out.println("Array: "+Arrays.toString(array));
-        observableList.clear();
-        for (int item: array){
-            observableList.add(item);
-        }
-        System.out.println("Observable list: "+observableList);
+    private String fillTextArea(){
+        textAreaString = Arrays.toString(arrayCreation.createArray(30));
+        return textAreaString;
     }
 
 }
