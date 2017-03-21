@@ -2,6 +2,7 @@ package model;
 
 public class BubbleStep {
 
+
     public static int[] bubbleStep(int[] list){
         Boolean sorted = true;
         while (sorted){

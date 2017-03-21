@@ -49,7 +49,7 @@ public class GuiAttributes {
     private Button makeStepButton() throws Exception{
         Button button = new Button("Step");
         button.setMaxWidth(Double.MAX_VALUE);
-//        button.setOnAction(e -> doReset()); MOET NOG FUNCTION VOOR WORDEN GEMAAKT
+        button.setOnAction(e -> doStep());
 
         return button;
     }
@@ -99,8 +99,12 @@ public class GuiAttributes {
 
     }
 
+    private void doStep(){
+
+    }
+
     private String fillTextArea(){
-        textAreaString = Arrays.toString(arrayCreation.createArray(30));
+        textAreaString = Arrays.toString(arrayCreation.createArray(25));
         return textAreaString;
     }
 
