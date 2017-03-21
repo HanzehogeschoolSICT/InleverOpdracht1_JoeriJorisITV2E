@@ -8,3 +8,8 @@ public class Main{
         javafx.application.Application.launch(view.StartGui.class);
     }
 }
+
+//eerst een algoritme
+//dan gui
+//Dan tweede algoritme
+

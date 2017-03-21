@@ -7,6 +7,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import model.ArrayCreation;
+import model.BubbleStep;
 
 import java.util.Arrays;
 
@@ -19,13 +20,13 @@ public class GuiAttributes {
     TextArea textArea;
     String textAreaString;
     ArrayCreation arrayCreation = new ArrayCreation();
+    int[] currentArray;
 
 
     final ToggleGroup toggleGroup = new ToggleGroup();
 
     public GuiAttributes(){
         try {
-//            int[] array = arrayCreation.createArray(30);
             this.resetButton = makeResetButton();
             this.stepButton = makeStepButton();
             this.radioBubble = makeRadioBubble();
@@ -33,6 +34,7 @@ public class GuiAttributes {
             this.radioQuick = makeRadioQuick();
             this.textAreaString = fillTextArea();
             this.textArea = testTextArea(textAreaString);
+            this.currentArray = arrayCreation.createArray(20);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -93,18 +95,20 @@ public class GuiAttributes {
 
     //-----------Event Handlers-----------
     private void doReset(){
-        textArea.setText(fillTextArea());
-        System.out.println(textAreaString);
+        currentArray = arrayCreation.createArray(20);
+        String currentArrayString = Arrays.toString(currentArray);
+        textArea.setText(currentArrayString);
+        System.out.println(currentArrayString);
         System.out.println("Toggled: " + toggleGroup.getSelectedToggle());
 
     }
 
     private void doStep(){
-
+        textArea.setText(Arrays.toString(BubbleStep.bubbleStep(currentArray)));
     }
 
     private String fillTextArea(){
-        textAreaString = Arrays.toString(arrayCreation.createArray(25));
+        textAreaString = Arrays.toString(arrayCreation.createArray(20));
         return textAreaString;
     }
 
