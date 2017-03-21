@@ -12,9 +12,7 @@ public class BubbleStep {
                     Integer temporaryI = list[i];
                     list[i] = list[i+1];
                     list[i+1] = temporaryI;
-                    sorted = true;
-//                    return list;
-//                    break;
+                    break;
                 }
             }
         }
