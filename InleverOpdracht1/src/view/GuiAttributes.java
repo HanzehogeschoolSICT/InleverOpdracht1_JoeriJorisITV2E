@@ -22,7 +22,6 @@ public class GuiAttributes {
     Boolean autoBoolean = false;
     RadioButton radioBubble;
     RadioButton radioInsertion;
-    RadioButton radioQuick;
     TextArea textArea;
     String textAreaString;
     ArrayCreation arrayCreation = new ArrayCreation();
@@ -39,7 +38,6 @@ public class GuiAttributes {
             this.runButton = makeRunButton();
             this.radioBubble = makeRadioBubble();
             this.radioInsertion = makeRadioInsertion();
-            this.radioQuick = makeRadioQuick();
             this.textAreaString = fillTextArea();
             this.textArea = testTextArea(textAreaString);
             this.currentArray = arrayCreation.createArray(20);
@@ -78,24 +76,6 @@ public class GuiAttributes {
         return button;
     }
 
-    private void autoRun() throws InterruptedException {
-        autoBoolean ^= true;
-
-        Timer timer = new Timer( );
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                //gaat ineens sneller lopen als pauze
-                if (autoBoolean){
-                    stepButton.setDisable(true);
-                    doStep();
-                    System.out.println("Test"+ currentAutoRun);
-                    currentAutoRun +=1;
-                }
-                stepButton.setDisable(false);
-            }
-        }, 1000, 1000);
-    }
 
     private RadioButton makeRadioBubble() throws Exception{
         RadioButton radioBubble = new RadioButton();
@@ -117,16 +97,6 @@ public class GuiAttributes {
         return radioInsertion;
     }
 
-    private RadioButton makeRadioQuick() throws Exception{
-        RadioButton radioQuick = new RadioButton();
-        radioQuick.setToggleGroup(toggleGroup);
-        radioQuick.setMaxWidth(Double.MAX_VALUE);
-        radioQuick.setAlignment(Pos.CENTER);
-        radioQuick.setText("Quick sort");
-
-        return radioQuick;
-    }
-
     private TextArea testTextArea(String list) throws Exception{
         TextArea textArea = new TextArea();
         textArea.setText(list);
@@ -135,6 +105,24 @@ public class GuiAttributes {
     }
 
     //-----------Event Handlers-----------
+    private void autoRun() throws InterruptedException {
+        autoBoolean ^= true;
+        Timer timer = new Timer( );
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                //gaat ineens sneller lopen als pauze
+                if (autoBoolean){
+                    stepButton.setDisable(true);
+                    doStep();
+                    System.out.println("Test"+ currentAutoRun);
+                    currentAutoRun +=1;
+                }
+                stepButton.setDisable(false);
+            }
+        }, 1000, 1000);
+    }
+
     private void doReset(){
         currentArray = arrayCreation.createArray(20);
         String currentArrayString = Arrays.toString(currentArray);
@@ -145,18 +133,16 @@ public class GuiAttributes {
     }
 
     private void doStep(){
-        if (toggleGroup.getSelectedToggle().toString().contains("Bubble")) {
-            textArea.setText(Arrays.toString(BubbleStep.bubbleStep(currentArray)));
-        }
-        else if(toggleGroup.getSelectedToggle().toString().contains("Insertion")){
-            textArea.setText(Arrays.toString(InsertionStep.insertionStep(currentArray)));
-        }
-        else if(toggleGroup.getSelectedToggle().toString().contains("Quick")){
-//            textArea.setText(Arrays.toString(QuickStep.quickStep(currentArray)));
-            System.out.println("quick algorithm");
-        }
-        else {
+        try {
+            if (toggleGroup.getSelectedToggle().toString().contains("Bubble")) {
+                textArea.setText(Arrays.toString(BubbleStep.bubbleStep(currentArray)));
+            } else if (toggleGroup.getSelectedToggle().toString().contains("Insertion")) {
+                textArea.setText(Arrays.toString(InsertionStep.insertionStep(currentArray)));
+            }
+        } catch (NullPointerException e){
             System.out.println("Er is geen sorterings algoritme geselecteerd");
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 

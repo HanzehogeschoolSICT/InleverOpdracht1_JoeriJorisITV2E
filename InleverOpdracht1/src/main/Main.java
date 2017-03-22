@@ -16,5 +16,4 @@ public class Main{
 
 // // TODO: 21-3-2017
     // - autorun na pauze fixen
-    // - quicksort implementeren
     // - zorgen dat alles netjes op zn plek komt.

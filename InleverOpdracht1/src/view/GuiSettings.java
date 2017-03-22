@@ -37,7 +37,6 @@ public class GuiSettings {
         bottomPane.getChildren().addAll(
                 guiAttributes.radioBubble,
                 guiAttributes.radioInsertion,
-                guiAttributes.radioQuick,
                 guiAttributes.runButton,
                 guiAttributes.stepButton,
                 guiAttributes.resetButton);
