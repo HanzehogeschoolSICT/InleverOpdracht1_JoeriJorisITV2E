@@ -113,12 +113,10 @@ public class GuiAttributes {
             public void run() {
                 //gaat ineens sneller lopen als pauze
                 if (autoBoolean){
-                    stepButton.setDisable(true);
                     doStep();
-                    System.out.println("Test"+ currentAutoRun);
+                    System.out.println("Timer at "+ currentAutoRun);
                     currentAutoRun +=1;
                 }
-                stepButton.setDisable(false);
             }
         }, 1000, 1000);
     }
