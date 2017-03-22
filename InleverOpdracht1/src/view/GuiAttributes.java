@@ -41,6 +41,17 @@ public class GuiAttributes {
             this.textAreaString = fillTextArea();
             this.textArea = testTextArea(textAreaString);
             this.currentArray = arrayCreation.createArray(20);
+            Timer timer = new Timer( );
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    //gaat ineens sneller lopen als pauze
+                    if (autoBoolean){
+                        doStep();
+                        currentAutoRun +=1;
+                    }
+                }
+            }, 1000, 1000);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -107,18 +118,6 @@ public class GuiAttributes {
     //-----------Event Handlers-----------
     private void autoRun() throws InterruptedException {
         autoBoolean ^= true;
-        Timer timer = new Timer( );
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                //gaat ineens sneller lopen als pauze
-                if (autoBoolean){
-                    doStep();
-                    System.out.println("Timer at "+ currentAutoRun);
-                    currentAutoRun +=1;
-                }
-            }
-        }, 1000, 1000);
     }
 
     private void doReset(){
