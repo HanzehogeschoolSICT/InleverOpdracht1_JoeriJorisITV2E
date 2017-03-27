@@ -1,0 +1,9 @@
+De uitslag van Bettercodehub is een 8.
+We hebben de code zo overzichtelijk mogelijk gelaten. Het is niet altijd even duidelijk, maar we hebben ons best gedaan.
+
+We hebben geen voldoende gekregen op het automatiseren van tests. Dit komt omdat we beide niet weten hoe dat moet.
+Voor een klein project als dit is het denk ik ook niet heel belangrijk om het te gebruiken.
+
+We hebben ook geen voldoende gekregen op het gebalanceerd houden van architecture components.
+Dit komt waarschijnlijk omdat we maar een component hebben. Het is niet duidelijk vanuit Bettercodehub wat er moet
+gebeuren om dit op te lossen.
