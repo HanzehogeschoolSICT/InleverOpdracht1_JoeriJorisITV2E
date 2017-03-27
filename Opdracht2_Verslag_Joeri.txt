@@ -1,0 +1,4 @@
+Voor inleveropdracht 2 kregen wij van Bettercodehub ook een 8.
+
+Dit is voor precies dezelfde reden als bij inleveropdracht 1.
+Er zijn geen geautomatiseerde tests, en architecture components zijn niet goed gebalanced.
