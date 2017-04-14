@@ -1,21 +1,20 @@
 package model;
 
-public class BubbleStep {
+public class BubbleStep implements SortingAlgorithmInterface{
 
-
-    public static int[] bubbleStep(int[] list){
+    public int[] doStep(int[] array){
         Boolean sorted = true;
         while (sorted){
             sorted = false;
-            for (int i = 0; i < list.length - 1; i++){
-                if (list[i] > list[i + 1]){
-                    Integer temporaryI = list[i];
-                    list[i] = list[i+1];
-                    list[i+1] = temporaryI;
+            for (int i = 0; i < array.length - 1; i++){
+                if (array[i] > array[i + 1]){
+                    Integer temporaryI = array[i];
+                    array[i] = array[i+1];
+                    array[i+1] = temporaryI;
                     break;
                 }
             }
         }
-        return list;
+        return array;
     }
 }

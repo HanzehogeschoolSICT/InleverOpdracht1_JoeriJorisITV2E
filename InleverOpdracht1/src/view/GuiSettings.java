@@ -33,7 +33,7 @@ public class GuiSettings {
         GuiAttributes guiAttributes = new GuiAttributes();
 
         hBox.getChildren().add(
-                guiAttributes.textArea);
+                guiAttributes.barChart);
         bottomPane.getChildren().addAll(
                 guiAttributes.radioBubble,
                 guiAttributes.radioInsertion,

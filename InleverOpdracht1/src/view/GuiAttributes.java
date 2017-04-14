@@ -1,6 +1,13 @@
 package view;
 
+import javafx.collections.ObservableArray;
 import javafx.geometry.Pos;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -23,10 +30,17 @@ public class GuiAttributes {
     RadioButton radioBubble;
     RadioButton radioInsertion;
     TextArea textArea;
+    Canvas canvas;
+    BarChart barChart;
     String textAreaString;
     ArrayCreation arrayCreation = new ArrayCreation();
+
+    ObservableArray observableArray;
     int[] currentArray;
     int currentAutoRun = 0;
+
+    InsertionStep insertionStep = new InsertionStep();
+    BubbleStep bubbleStep = new BubbleStep();
 
 
     final ToggleGroup toggleGroup = new ToggleGroup();
@@ -40,14 +54,18 @@ public class GuiAttributes {
             this.radioInsertion = makeRadioInsertion();
             this.textAreaString = fillTextArea();
             this.textArea = testTextArea(textAreaString);
+            this.canvas = new Canvas();
+            GraphicsContext gc = canvas.getGraphicsContext2D();
+
+
             this.currentArray = arrayCreation.createArray(20);
+            makeBarchart();
             Timer timer = new Timer( );
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
-                    //gaat ineens sneller lopen als pauze
                     if (autoBoolean){
-                        doStep();
+                        tryStep();
                         currentAutoRun +=1;
                     }
                 }
@@ -68,7 +86,7 @@ public class GuiAttributes {
     private Button makeStepButton() throws Exception{
         Button button = new Button("Step");
         button.setMaxWidth(Double.MAX_VALUE);
-        button.setOnAction(e -> doStep());
+        button.setOnAction(e -> tryStep());
 
         return button;
     }
@@ -124,17 +142,15 @@ public class GuiAttributes {
         currentArray = arrayCreation.createArray(20);
         String currentArrayString = Arrays.toString(currentArray);
         textArea.setText(currentArrayString);
-        System.out.println(currentArrayString);
-        System.out.println("Toggled: " + toggleGroup.getSelectedToggle());
 
     }
 
-    private void doStep(){
+   private void tryStep(){
         try {
             if (toggleGroup.getSelectedToggle().toString().contains("Bubble")) {
-                textArea.setText(Arrays.toString(BubbleStep.bubbleStep(currentArray)));
+                textArea.setText(Arrays.toString(bubbleStep.doStep(currentArray)));
             } else if (toggleGroup.getSelectedToggle().toString().contains("Insertion")) {
-                textArea.setText(Arrays.toString(InsertionStep.insertionStep(currentArray)));
+                textArea.setText(Arrays.toString(insertionStep.doStep(currentArray)));
             }
         } catch (NullPointerException e){
             System.out.println("Er is geen sorterings algoritme geselecteerd");
@@ -146,6 +162,25 @@ public class GuiAttributes {
     private String fillTextArea(){
         textAreaString = Arrays.toString(arrayCreation.createArray(20));
         return textAreaString;
+    }
+
+    private void makeBarchart(){
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        BarChart<String, Number> barChart =
+                new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Sorting algorithm step-by-step");
+
+        XYChart.Series series1 = new XYChart.Series();
+
+        for (int item:currentArray){
+            series1.getData().add(new XYChart.Data(Integer.toString(item), item));
+        }
+        barChart.getData().addAll(series1);
+        barChart.setBarGap(1);
+        barChart.setCategoryGap(0);
+
+        this.barChart = barChart;
     }
 
 }

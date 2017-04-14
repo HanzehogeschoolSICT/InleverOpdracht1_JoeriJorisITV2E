@@ -1,10 +1,8 @@
 package model;
 
-import view.GuiAttributes;
+public class InsertionStep implements SortingAlgorithmInterface{
 
-
-public class InsertionStep {
-    public static int[] insertionStep(int[] array) {
+    public int[] doStep(int[] array) {
         //inspiratie: http://www.algolist.net/Algorithms/Sorting/Insertion_sort
         int i;
         int j;
