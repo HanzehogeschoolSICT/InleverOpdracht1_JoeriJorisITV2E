@@ -30,7 +30,6 @@ public class GuiSettings {
             @Override
             public void event(int event_id, Object extra_info) {
                 if (event_id == GuiAttributes.BUTTON_BUBBLE){
-                    System.out.println("Callback vanuit guiSettings");
                     try {
                         scene = makeScene();
                     } catch (Exception e) {

@@ -1,6 +1,8 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableArray;
+import javafx.embed.swing.JFXPanel;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -37,7 +39,6 @@ public class GuiAttributes {
     ArrayCreation arrayCreation = new ArrayCreation();
 
     int[] currentArray;
-    int currentAutoRun = 0;
 
     InsertionStep insertionStep = new InsertionStep();
     BubbleStep bubbleStep = new BubbleStep();
@@ -65,16 +66,20 @@ public class GuiAttributes {
 
             this.currentArray = arrayCreation.createArray(20);
             makeBarchart();
+
+
             Timer timer = new Timer( );
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
-                    if (autoBoolean){
-                        tryStep();
-                        currentAutoRun +=1;
-                    }
+                    Platform.runLater(() -> {
+                        if (autoBoolean) {
+                            tryStep();
+                        }
+                    });
                 }
             }, 1000, 1000);
+
         } catch (Exception e){
             e.printStackTrace();
         }

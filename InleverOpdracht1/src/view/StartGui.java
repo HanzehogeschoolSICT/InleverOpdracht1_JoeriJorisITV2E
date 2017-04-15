@@ -1,10 +1,12 @@
 package view;
 
 import javafx.application.Application;
+import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
 import model.Controller_Event;
 
 public class StartGui extends Application{
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         GuiSettings guiSettings = new GuiSettings();
@@ -21,7 +23,6 @@ public class StartGui extends Application{
             @Override
             public void event(int event_id, Object extra_info) {
                 if (event_id == GuiAttributes.BUTTON_BUBBLE || event_id == GuiAttributes.BUTTON_INSERTION){
-                    System.out.println("Callback vanuit StartGUI");
                     primaryStage.setScene(guiSettings.scene);
                 }
             }
