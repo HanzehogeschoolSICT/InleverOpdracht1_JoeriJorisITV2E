@@ -14,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import model.ArrayCreation;
 import model.BubbleStep;
+import model.Controller_Event;
 import model.InsertionStep;
 
 import java.util.Arrays;
@@ -35,15 +36,21 @@ public class GuiAttributes {
     String textAreaString;
     ArrayCreation arrayCreation = new ArrayCreation();
 
-    ObservableArray observableArray;
     int[] currentArray;
     int currentAutoRun = 0;
 
     InsertionStep insertionStep = new InsertionStep();
     BubbleStep bubbleStep = new BubbleStep();
 
-
     final ToggleGroup toggleGroup = new ToggleGroup();
+    public static final int BUTTON_BUBBLE = 1;
+    public static final int BUTTON_INSERTION = 2;
+
+    public Controller_Event controller_event;
+
+    public void set_controller_eventhandler(Controller_Event controller_event) {
+        this.controller_event=controller_event;
+    }
 
     public GuiAttributes(){
         try {
@@ -55,8 +62,6 @@ public class GuiAttributes {
             this.textAreaString = fillTextArea();
             this.textArea = testTextArea(textAreaString);
             this.canvas = new Canvas();
-            GraphicsContext gc = canvas.getGraphicsContext2D();
-
 
             this.currentArray = arrayCreation.createArray(20);
             makeBarchart();
@@ -149,8 +154,12 @@ public class GuiAttributes {
         try {
             if (toggleGroup.getSelectedToggle().toString().contains("Bubble")) {
                 textArea.setText(Arrays.toString(bubbleStep.doStep(currentArray)));
+                makeBarchart();
+                controller_event.event(BUTTON_BUBBLE, null);
             } else if (toggleGroup.getSelectedToggle().toString().contains("Insertion")) {
                 textArea.setText(Arrays.toString(insertionStep.doStep(currentArray)));
+                makeBarchart();
+                controller_event.event(BUTTON_INSERTION, null);
             }
         } catch (NullPointerException e){
             System.out.println("Er is geen sorterings algoritme geselecteerd");

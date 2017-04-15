@@ -7,10 +7,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.Controller_Event;
 
 public class GuiSettings {
 
     Scene scene;
+    GuiAttributes guiAttributes = new GuiAttributes();
+    public Controller_Event controller_event;
+
+    public void set_controller_eventhandler(Controller_Event controller_event) {
+        this.controller_event=controller_event;
+    }
 
     public GuiSettings(){
         try{
@@ -18,6 +25,30 @@ public class GuiSettings {
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        guiAttributes.set_controller_eventhandler(new Controller_Event() {
+            @Override
+            public void event(int event_id, Object extra_info) {
+                if (event_id == GuiAttributes.BUTTON_BUBBLE){
+                    System.out.println("Callback vanuit guiSettings");
+                    try {
+                        scene = makeScene();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    controller_event.event(GuiAttributes.BUTTON_BUBBLE, null);
+                }
+                else if (event_id == GuiAttributes.BUTTON_INSERTION){
+                    System.out.println("Callback vanuit guiSettings");
+                    try {
+                        scene = makeScene();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    controller_event.event(GuiAttributes.BUTTON_INSERTION, null);
+                }
+            }
+        });
     }
 
     private BorderPane makeRootVBox() throws Exception{
@@ -30,7 +61,6 @@ public class GuiSettings {
 
         vBox.borderProperty();
 
-        GuiAttributes guiAttributes = new GuiAttributes();
 
         hBox.getChildren().add(
                 guiAttributes.barChart);
@@ -68,5 +98,6 @@ public class GuiSettings {
         Scene scene = new Scene(rootPane,650,400);
         return scene;
     }
+
 
 }
