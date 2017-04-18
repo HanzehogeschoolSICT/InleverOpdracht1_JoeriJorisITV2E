@@ -22,7 +22,7 @@ public class StartGui extends Application{
         guiSettings.set_controller_eventhandler(new Controller_Event() {
             @Override
             public void event(int event_id, Object extra_info) {
-                if (event_id == GuiAttributes.BUTTON_BUBBLE || event_id == GuiAttributes.BUTTON_INSERTION || event_id == GuiAttributes.BUTTON_QUICK){
+                if (event_id == GuiAttributes.BUTTON_BUBBLE || event_id == GuiAttributes.BUTTON_INSERTION || event_id == GuiAttributes.BUTTON_QUICK || event_id == GuiAttributes.BUTTON_RESET){
                     primaryStage.setScene(guiSettings.scene);
                 }
             }

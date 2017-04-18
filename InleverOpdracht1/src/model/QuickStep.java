@@ -1,13 +1,12 @@
 package model;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 public class QuickStep implements SortingAlgorithmInterface{
     //inspiratie: http://javarevisited.blogspot.nl/2016/09/iterative-quicksort-example-in-java-without-recursion.html
 
     public int[] doStep(int[] array) {
-        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> stack = new Stack<Integer>();
         stack.push(0);
         stack.push(array.length);
 
@@ -19,7 +18,6 @@ public class QuickStep implements SortingAlgorithmInterface{
             }
             int part = start + ((end - start) / 2);
             part = partition(array, part, start, end);
-            System.out.println(Arrays.toString(array));
 
             stack.push(part + 1);
             stack.push(end);
@@ -27,9 +25,7 @@ public class QuickStep implements SortingAlgorithmInterface{
             stack.push(start);
             stack.push(part);
         }
-//        System.out.println(Arrays.toString(array));
         return array;
-
     }
 
     private static int partition(int[] input, int position, int start, int end){
@@ -52,8 +48,6 @@ public class QuickStep implements SortingAlgorithmInterface{
             idx++;
         }
         swap(input, end - 1, idx);
-
-
         return idx;
     }
 

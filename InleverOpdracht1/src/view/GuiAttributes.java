@@ -46,6 +46,7 @@ public class GuiAttributes {
     public static final int BUTTON_BUBBLE = 1;
     public static final int BUTTON_INSERTION = 2;
     public static final int BUTTON_QUICK = 3;
+    public static final int BUTTON_RESET = 4;
 
     public Controller_Event controller_event;
 
@@ -61,7 +62,7 @@ public class GuiAttributes {
             this.radioBubble = makeRadioBubble();
             this.radioInsertion = makeRadioInsertion();
             this.radioQuick = makeRadioQuick();
-//            this.textAreaString = fillTextArea();
+            this.textAreaString = fillTextArea();
             this.textArea = testTextArea(textAreaString);
             this.canvas = new Canvas();
 
@@ -163,10 +164,12 @@ public class GuiAttributes {
         currentArray = arrayCreation.createArray(20);
         String currentArrayString = Arrays.toString(currentArray);
         textArea.setText(currentArrayString);
+        makeBarchart();
+        controller_event.event(BUTTON_RESET, null);
 
     }
 
-   private void tryStep(){
+    private void tryStep(){
         try {
             if (toggleGroup.getSelectedToggle().toString().contains("Bubble")) {
                 textArea.setText(Arrays.toString(bubbleStep.doStep(currentArray)));
@@ -188,10 +191,10 @@ public class GuiAttributes {
         }
     }
 
-//    private String fillTextArea(){
-//        textAreaString = Arrays.toString(arrayCreation.createArray(20));
-//        return textAreaString;
-//    }
+    private String fillTextArea(){
+        textAreaString = Arrays.toString(arrayCreation.createArray(20));
+        return textAreaString;
+    }
 
     private void makeBarchart(){
         final CategoryAxis xAxis = new CategoryAxis();
@@ -205,7 +208,6 @@ public class GuiAttributes {
         for (int item:currentArray){
             series1.getData().add(new XYChart.Data(Integer.toString(item), item));
         }
-
         barChart.getData().addAll(series1);
         barChart.setBarGap(1);
         barChart.setCategoryGap(0);
@@ -214,4 +216,3 @@ public class GuiAttributes {
     }
 
 }
-

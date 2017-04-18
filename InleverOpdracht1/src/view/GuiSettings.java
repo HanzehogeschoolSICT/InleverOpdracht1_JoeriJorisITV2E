@@ -53,6 +53,14 @@ public class GuiSettings {
                     }
                     controller_event.event(GuiAttributes.BUTTON_QUICK, null);
                 }
+                else if (event_id == GuiAttributes.BUTTON_RESET){
+                    try{
+                        scene = makeScene();
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    controller_event.event(GuiAttributes.BUTTON_RESET, null);
+                }
             }
         });
     }
