@@ -46,6 +46,14 @@ public class GuiSettings {
                     }
                     controller_event.event(GuiAttributes.BUTTON_INSERTION, null);
                 }
+                else if (event_id == GuiAttributes.BUTTON_QUICK){
+                    try{
+                        scene = makeScene();
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    controller_event.event(GuiAttributes.BUTTON_QUICK, null);
+                }
             }
         });
     }
@@ -66,6 +74,7 @@ public class GuiSettings {
         bottomPane.getChildren().addAll(
                 guiAttributes.radioBubble,
                 guiAttributes.radioInsertion,
+                guiAttributes.radioQuick,
                 guiAttributes.runButton,
                 guiAttributes.stepButton,
                 guiAttributes.resetButton);

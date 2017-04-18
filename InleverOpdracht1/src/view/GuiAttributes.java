@@ -14,10 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
-import model.ArrayCreation;
-import model.BubbleStep;
-import model.Controller_Event;
-import model.InsertionStep;
+import model.*;
 
 import java.util.Arrays;
 import java.util.Timer;
@@ -32,6 +29,7 @@ public class GuiAttributes {
     Boolean autoBoolean = false;
     RadioButton radioBubble;
     RadioButton radioInsertion;
+    RadioButton radioQuick;
     TextArea textArea;
     Canvas canvas;
     BarChart barChart;
@@ -42,10 +40,12 @@ public class GuiAttributes {
 
     InsertionStep insertionStep = new InsertionStep();
     BubbleStep bubbleStep = new BubbleStep();
+    QuickStep quickStep = new QuickStep();
 
     final ToggleGroup toggleGroup = new ToggleGroup();
     public static final int BUTTON_BUBBLE = 1;
     public static final int BUTTON_INSERTION = 2;
+    public static final int BUTTON_QUICK = 3;
 
     public Controller_Event controller_event;
 
@@ -60,6 +60,7 @@ public class GuiAttributes {
             this.runButton = makeRunButton();
             this.radioBubble = makeRadioBubble();
             this.radioInsertion = makeRadioInsertion();
+            this.radioQuick = makeRadioQuick();
             this.textAreaString = fillTextArea();
             this.textArea = testTextArea(textAreaString);
             this.canvas = new Canvas();
@@ -136,6 +137,16 @@ public class GuiAttributes {
         return radioInsertion;
     }
 
+    private RadioButton makeRadioQuick() throws Exception{
+        RadioButton radioQuick = new RadioButton();
+        radioQuick.setToggleGroup(toggleGroup);
+        radioQuick.setMaxWidth(Double.MAX_VALUE);
+        radioQuick.setAlignment(Pos.CENTER);
+        radioQuick.setText("Quick sort");
+
+        return radioQuick;
+    }
+
     private TextArea testTextArea(String list) throws Exception{
         TextArea textArea = new TextArea();
         textArea.setText(list);
@@ -165,6 +176,10 @@ public class GuiAttributes {
                 textArea.setText(Arrays.toString(insertionStep.doStep(currentArray)));
                 makeBarchart();
                 controller_event.event(BUTTON_INSERTION, null);
+            } else if (toggleGroup.getSelectedToggle().toString().contains("Quick")) {
+                textArea.setText(Arrays.toString(quickStep.doStep(currentArray)));
+                makeBarchart();
+                controller_event.event(BUTTON_QUICK, null);
             }
         } catch (NullPointerException e){
             System.out.println("Er is geen sorterings algoritme geselecteerd");
