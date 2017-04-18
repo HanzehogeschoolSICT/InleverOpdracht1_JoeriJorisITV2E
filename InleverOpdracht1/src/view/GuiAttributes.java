@@ -61,7 +61,7 @@ public class GuiAttributes {
             this.radioBubble = makeRadioBubble();
             this.radioInsertion = makeRadioInsertion();
             this.radioQuick = makeRadioQuick();
-            this.textAreaString = fillTextArea();
+//            this.textAreaString = fillTextArea();
             this.textArea = testTextArea(textAreaString);
             this.canvas = new Canvas();
 
@@ -188,10 +188,10 @@ public class GuiAttributes {
         }
     }
 
-    private String fillTextArea(){
-        textAreaString = Arrays.toString(arrayCreation.createArray(20));
-        return textAreaString;
-    }
+//    private String fillTextArea(){
+//        textAreaString = Arrays.toString(arrayCreation.createArray(20));
+//        return textAreaString;
+//    }
 
     private void makeBarchart(){
         final CategoryAxis xAxis = new CategoryAxis();
@@ -205,6 +205,7 @@ public class GuiAttributes {
         for (int item:currentArray){
             series1.getData().add(new XYChart.Data(Integer.toString(item), item));
         }
+
         barChart.getData().addAll(series1);
         barChart.setBarGap(1);
         barChart.setCategoryGap(0);

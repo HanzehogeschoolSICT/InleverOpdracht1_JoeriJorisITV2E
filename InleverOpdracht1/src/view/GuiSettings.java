@@ -38,7 +38,6 @@ public class GuiSettings {
                     controller_event.event(GuiAttributes.BUTTON_BUBBLE, null);
                 }
                 else if (event_id == GuiAttributes.BUTTON_INSERTION){
-                    System.out.println("Callback vanuit guiSettings");
                     try {
                         scene = makeScene();
                     } catch (Exception e) {
